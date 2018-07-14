@@ -21,7 +21,7 @@
                 <input type="text" class="form-control" id="studentNameId" placeholder="请输入学生姓名进行查询" aria-describedby="basic-addon1" style="width:200px;margin-right:10px;"
                     value="{{studentName}}">
                 <input type="button" class="btn btn-success" onclick="search()" value="查找" style="margin-right:10px;">
-                <input type="button" class="btn btn-success" value="新增" onclick="window.location='/studentmanager/add'">
+                <input type="button" class="btn btn-success" value="新增" onclick="window.location='/student/add'">
             </div>
         </div>
         <div class="panel-body">
@@ -43,9 +43,9 @@
                         <td>{{this.sex}}</td>
                         <td>{{this.phone}}</td>
                         <td>
-                            <a href="#" class="btn btn-success">编辑</a> |
+                            <a href="/student/edit/{{this._id}}" class="btn btn-success">编辑</a> |
     
-                            <input type="button" class="btn btn-danger" value="删除">
+                            <input type="button" class="btn btn-danger" onclick="deleteId('{{this._id}}')" value="删除">
                         </td>
                     </tr>
                     {{/each}}
@@ -59,6 +59,14 @@
             const studentName = $('#studentNameId').val();
             // 点击发送请求
             window.location.href = "/student/list?studentName="+studentName
+        }
+        // 点击删除  把数据删除掉
+        function deleteId(studentId){
+            // 点击后给后台发送请求 进行删除
+            // console.log(studentId) // 当用户点击确定就发送给后台进行删除
+            if(confirm("确定删除吗?")){
+                window.location.href =`/student/delete/${studentId}` 
+            }
         }
     </script>
 {{/block}}

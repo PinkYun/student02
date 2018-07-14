@@ -17,7 +17,8 @@ accountRouter.get('/register',loginControl.getRegisterPage)
 accountRouter.post('/register',loginControl.register)
 // 登录请求
 accountRouter.post('/login',loginControl.login)
-
+// 点击退出登录
+accountRouter.get('/logout',loginControl.logout)
 
 // 暴露出去
 module.exports = accountRouter

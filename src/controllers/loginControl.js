@@ -45,6 +45,7 @@ exports.register = (req,res)=>{
         const result1 ={status:0,message:'注册成功'};
         // console.log(req.body);
         const {username,password} = req.body;
+      
         // console.log(username);
         // console.log(password);
         // Use connect method to connect to the server  连接数据库
@@ -93,7 +94,8 @@ exports.login = (req,res)=>{
         //    console.log(req.body)
         // 获取发送过来的数据
         const {username,password,vcode} = req.body;
-
+          // 保存登录过的用户名
+          req.session.loginName = username
         // 判断发送过来的验证码与之前使用session保存是否一致 不一致就提示用户
         if(vcode !=req.session.vcode){
             // 进来到这里说明验证码不正确
@@ -126,3 +128,9 @@ exports.login = (req,res)=>{
         
 }
       
+// 退出登录 删除保存的session
+exports.logout = (req,res)=>{
+        req.session.loginName = null;
+        
+       res.send('<script>window.location.href= "/account/login"</script>')
+}
